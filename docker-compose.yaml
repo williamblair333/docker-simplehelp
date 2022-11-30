@@ -1,8 +1,8 @@
 version: '3'
 services:
     simple-help:
-        #image: localhost:5000/simple-help:5.2
-        image: simple-help:5.2
+        #image: localhost:5000/simple-help:5.4.5
+        image: simple-help:5.4.5
         restart: unless-stopped
         networks:
             <network_name>:
