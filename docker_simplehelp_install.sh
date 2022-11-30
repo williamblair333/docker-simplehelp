@@ -20,7 +20,7 @@
 #- TODO:
 ################################################################################
 IMAGE_SOURCE="debian:11-slim"
-IMAGE_NAME="simple-help:5.2"
+IMAGE_NAME="simple-help:5.4.5"
 COMPOSE_FILE="docker-compose.yaml"
 docker pull "$IMAGE_SOURCE"
 #---------------------------------------------------------------------------------
@@ -49,15 +49,12 @@ RUN rm -rf /var/lib/apt/lists/* 1>/dev/null
 
 WORKDIR /opt
 #Uncomment next line for new installations
-RUN wget https://simple-help.com/releases/SimpleHelp-linux-amd64.tar.gz
+RUN wget --no-verbose https://simple-help.com/releases/SimpleHelp-linux-amd64.tar.gz
 #RUN wget https://simple-help.com/releases/5.2.17/SimpleHelp-linux-amd64.tar.gz
-#COPY ./SimpleHelp-linux-amd64.tar.gz .
 
-#RUN cd /opt && tar -xzf SimpleHelp-linux-amd64.tar.gz && rm SimpleHelp-linux-amd64.tar.gz
 RUN tar -xzf SimpleHelp-linux-amd64.tar.gz && rm SimpleHelp-linux-amd64.tar.gz
 
 WORKDIR /opt/SimpleHelp
-
 RUN sed -i 's/&//g' serverstart.sh
 
 CMD ["sh", "serverstart.sh"]
@@ -78,15 +75,12 @@ cat > "$COMPOSE_FILE" << EOF
 version: '3'
 services:
     simple-help:
-        #image: localhost:5000/simple-help:5.2
-        image: simple-help:5.2
+        #image: localhost:5000/simple-help:5.4.5
+        image: simple-help:5.4.5
         restart: unless-stopped
-        networks:
-            caddy:
-                ipv4_address: 172.16.0.12
         ports:
-            - "8012:80"
-            - "44312:443"
+            - "80:80"
+            - "443:443"
         volumes:
             - ./shlicense.txt:/opt/SimpleHelp/shlicense.txt:rw
             #uncomment if you're move existing install to another server or
@@ -97,8 +91,5 @@ services:
             
         stdin_open: true # docker run -i
         tty: true        # docker run -t
-networks:
-  caddy:
-    external: true
 EOF
 #---------------------------------------------------------------------------------
