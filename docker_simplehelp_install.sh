@@ -78,9 +78,6 @@ services:
         #image: localhost:5000/simple-help:5.4.5
         image: simple-help:5.4.5
         restart: unless-stopped
-        networks:
-            <network_name>:
-                ipv4_address: <ip_address>
         ports:
             - "80:80"
             - "443:443"
@@ -94,8 +91,5 @@ services:
             
         stdin_open: true # docker run -i
         tty: true        # docker run -t
-networks:
-    <network_name>:
-        external: true
 EOF
 #---------------------------------------------------------------------------------
