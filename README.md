@@ -7,10 +7,10 @@ Read over the docker_simplehelp_install.sh file and make changes accordingly.  R
 
 # Notes 
 For wget to work, ca-certificates package needs to be installed.  You may also need to destroy any external network you're using (along with containers that use it) and recreate the network setting the mtu to 1400~ish.  Here's an example  
-    docker network create \\
-        --driver=bridge \\
-        --subnet=172.16.0.0/26 \\
-        --ip-range=172.16.0.0/27 \\
-        --gateway=172.16.0.1 \\
-        -o com.docker.network.driver.mtu=1400 \\
-        <network_name>
+    docker network create \\  
+        --driver=bridge \\  
+        --subnet=172.16.0.0/26 \\  
+        --ip-range=172.16.0.0/27 \\  
+        --gateway=172.16.0.1 \\  
+        -o com.docker.network.driver.mtu=1400 \\  
+        <network_name>  
