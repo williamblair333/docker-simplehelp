@@ -49,7 +49,7 @@ RUN rm -rf /var/lib/apt/lists/* 1>/dev/null
 
 WORKDIR /opt
 #Uncomment next line for new installations
-RUN wget https://simple-help.com/releases/SimpleHelp-linux-amd64.tar.gz
+RUN wget --no-verbose https://simple-help.com/releases/SimpleHelp-linux-amd64.tar.gz
 #RUN wget https://simple-help.com/releases/5.2.17/SimpleHelp-linux-amd64.tar.gz
 
 RUN tar -xzf SimpleHelp-linux-amd64.tar.gz && rm SimpleHelp-linux-amd64.tar.gz
